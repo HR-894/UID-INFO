@@ -1,7 +1,5 @@
 {
-  "functions": {
-    "api/ffinfo.js": {
-      "runtime": "nodejs20.x"
-    }
-  }
+	"routes": [
+		{ "src": "/", "dest": "/public/index.html" }
+	]
 }
