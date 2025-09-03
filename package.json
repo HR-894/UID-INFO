@@ -1,0 +1,13 @@
+{
+  "name": "freefire-info-scraper",
+  "version": "1.0.0",
+  "description": "A serverless API to scrape Free Fire player information using UID.",
+  "main": "api/ffinfo.js",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}

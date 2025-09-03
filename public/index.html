@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Info Scraper</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: #f0f2f5; color: #1c1e21; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 600px; width: 100%; }
+        h1 { color: #ff6f00; text-align: center; margin-bottom: 1.5rem; }
+        form { display: flex; gap: 10px; margin-bottom: 1.5rem; }
+        input { flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #0056b3; }
+        pre { background: #e9ebee; padding: 1rem; border-radius: 6px; white-space: pre-wrap; word-wrap: break-word; font-family: monospace; }
+        .loader { text-align: center; font-size: 1.2rem; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Free Fire Player Info</h1>
+        <form id="uidForm">
+            <input type="text" id="uidInput" placeholder="Enter Player UID" required>
+            <button type="submit">Get Info</button>
+        </form>
+        <div id="loading" class="loader" style="display: none;">Loading...</div>
+        <pre id="results"></pre>
+    </div>
+
+    <script>
+        const form = document.getElementById('uidForm');
+        const uidInput = document.getElementById('uidInput');
+        const resultsContainer = document.getElementById('results');
+        const loadingIndicator = document.getElementById('loading');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const uid = uidInput.value.trim();
+            if (!uid) return;
+
+            resultsContainer.textContent = '';
+            loadingIndicator.style.display = 'block';
+
+            try {
+                const response = await fetch(`/api/ffinfo?uid=${uid}`);
+                const data = await response.json();
+                resultsContainer.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultsContainer.textContent = JSON.stringify({ error: 'Failed to fetch data. Please check the console.' }, null, 2);
+                console.error('Fetch Error:', error);
+            } finally {
+                loadingIndicator.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
