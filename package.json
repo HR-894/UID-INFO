@@ -4,8 +4,8 @@
   "description": "A serverless API to scrape Free Fire player information using UID.",
   "main": "api/ffinfo.js",
   "dependencies": {
-    "axios": "^1.7.2",
-    "cheerio": "^1.0.0-rc.12"
+    "@sparticuz/chromium": "^123.0.1",
+    "puppeteer-core": "^22.10.0"
   },
   "engines": {
     "node": "20.x"
