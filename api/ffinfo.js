@@ -72,8 +72,8 @@ module.exports = async (req, res) => {
             equipped_pet: extractData($, 'Pet'),
             guild: guildMatch ? {
                 name: guildMatch[1].trim(),
-                id: guildMatch[3],
-                role: guildMatch[4].trim()
+                id: guildMatch[2],
+                role: guildMatch[3].trim()
             } : { name: 'No Guild', id: null, role: null }
         };
 
